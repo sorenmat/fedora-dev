@@ -38,3 +38,4 @@ openssh
 git
 docker-compose
 util-linux-user
+hub
