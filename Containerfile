@@ -9,7 +9,7 @@ COPY extra-packages /
 RUN microdnf install -y dnf
 #RUN dnf update -y
 RUN echo fastestmirror=1 >> /etc/dnf/dnf.conf
-
+RUN microdnf -y install dnf-plugins-core
 RUN dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 
 RUN grep -v '^#' /extra-packages | xargs microdnf install -y
