@@ -6,9 +6,8 @@ LABEL com.github.containers.toolbox="true" \
       maintainer="jorge.castro@gmail.com"
 
 COPY extra-packages /
-RUN dnf update && \
-    dnf upgrade && \
-    grep -v '^#' /extra-packages | xargs dnf install
+RUN dnf update -y
+RUN grep -v '^#' /extra-packages | xargs dnf install -y
 RUN rm /extra-packages
 
 # Install from testing
