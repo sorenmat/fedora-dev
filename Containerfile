@@ -8,8 +8,11 @@ LABEL com.github.containers.toolbox="true" \
 COPY extra-packages /
 RUN microdnf install -y dnf
 RUN dnf update -y
+RUN echo fastestmirror=1 >> /etc/dnf/dnf.conf
 RUN grep -v '^#' /extra-packages | xargs dnf install -y
 RUN rm /extra-packages
+# Install starship
+RUN curl -sS https://starship.rs/install.sh > install.sh && chmod 755 install.sh && ./install.sh -y && rm install.sh
 
 # Install from testing
 #RUN apk add hub --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/
@@ -71,9 +74,10 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 #    && echo java --version && java --version \
 #    && echo Complete.
 #    
-
-RUN   ln -fs /bin/sh /usr/bin/sh && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
+RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc
+RUN echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo
+RUN dnf check-update && dnf install -y code
+RUN   ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/firefox && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
