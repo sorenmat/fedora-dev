@@ -36,6 +36,10 @@ wget
 tar
 openssh
 git
-docker-compose
 util-linux-user
 hub
+docker-ce
+docker-ce-cli
+containerd.io
+docker-buildx-plugin
+docker-compose-plugin

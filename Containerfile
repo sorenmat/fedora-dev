@@ -9,6 +9,9 @@ COPY extra-packages /
 RUN microdnf install -y dnf
 #RUN dnf update -y
 RUN echo fastestmirror=1 >> /etc/dnf/dnf.conf
+
+RUN dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+
 RUN grep -v '^#' /extra-packages | xargs microdnf install -y
 RUN rm /extra-packages
 
@@ -80,7 +83,6 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc
 RUN echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo
 RUN microdnf install -y code
-
 
 RUN   ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/firefox && \
