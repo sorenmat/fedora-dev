@@ -39,3 +39,5 @@ git
 util-linux-user
 hub
 psmisc
+gvfs
+gvfs-goa
