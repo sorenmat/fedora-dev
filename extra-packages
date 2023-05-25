@@ -43,3 +43,4 @@ gvfs
 gvfs-goa
 go
 bzip2
+sqlite
