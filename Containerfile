@@ -11,6 +11,7 @@ RUN microdnf install -y dnf
 RUN echo fastestmirror=1 >> /etc/dnf/dnf.conf
 RUN microdnf -y install dnf-plugins-core
 RUN dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+RUN dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
 
 RUN grep -v '^#' /extra-packages | xargs microdnf install -y
 RUN rm /extra-packages
