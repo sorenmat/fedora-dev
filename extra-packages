@@ -45,3 +45,4 @@ go
 bzip2
 sqlite
 terraform
+golang-sigs-k8s-kustomize
