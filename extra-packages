@@ -47,3 +47,4 @@ sqlite
 terraform
 golang-sigs-k8s-kustomize
 java-latest-openjdk
+net-tools
